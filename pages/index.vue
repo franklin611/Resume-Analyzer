@@ -19,9 +19,9 @@
 		</div>
 
 		<div class="input-form" style="display:block; text-align:center;">
-			<div>
+			<div style="margin-bottom:20px">
 				<!-- <h2 style="display: inline; margin-bottom: 20px; margin-right: 20px;">Similarities</h2> -->
-				<h2 style="display: inline; margin-bottom: 20px; margin-right: 20px;">Similarity Score: <span id="scoreValue">{{ score }}</span>%</h2>
+				<h2 style="display: inline;">Similarity Score: <span id="scoreValue">{{ score }}</span>%</h2>
 			</div>
 			<textarea class="text-area" id="similarities" v-model="similaritiesText" readonly></textarea>
 		</div>
