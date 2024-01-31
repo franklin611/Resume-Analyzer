@@ -1,4 +1,54 @@
-<script setup>
+
+<template>
+	<div class="max-w-xl mx-auto text-black">
+		<h1 class="my-8 text-5xl font-bold text-center text-black">Resume Analyzer</h1>
+	
+		<div class="input-form">
+			<label for="inputText">Resume Text:</label>
+			<input type="text" id="inputText" v-model="inputText">
+
+			<button class="submit-button" id="submitButton" @click="submitText">Submit</button>
+
+			
+		</div>
+		<div class="input-form">
+			<textarea class="text-area" id="outputArea" v-model="outputText" readonly></textarea>
+		</div>
+
+		<div class="description-form">
+			<label for="descriptionText">Job Description:</label>
+			<input type="text" id="descriptionText" v-model="description">
+
+			<button class="submit-button" @click="submitDescription">Submit</button>
+		</div>
+
+
+		
+		<div class="flex flex-col justify-center w-full my-4">
+			<div class="flex items-center justify-center my-2">
+				<span>Made with ♡ by Franklin Ramirez</span>
+
+			</div>
+		</div>
+	</div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      inputText: '',
+      outputText: ''
+    };
+  },
+  methods: {
+    submitText() {
+      console.log("Submit button clicked. Input text:", this.inputText); // Debugging log
+      this.outputText = this.inputText;
+    }
+  }
+};
+
 	const messages = ref([
 		{
 			role: 'AI',
@@ -48,80 +98,114 @@
 		loading.value = false;
 		scrollToEnd();
 	};
+
 </script>
 
-<template>
-	<div class="max-w-xl mx-auto text-black">
-		<h1 class="my-8 text-5xl font-bold text-center text-black">Resume Analyzer</h1>
-		<!-- <div class="max-w-xl mx-auto">
-			<div class="bg-white rounded-md shadow h-[60vh] flex flex-col justify-between">
-				<div class="h-full overflow-auto chat-messages">
-					<div v-for="(message, i) in messages" :key="i" class="flex flex-col p-4">
-						<div v-if="message.role === 'AI'" class="pr-8 mr-auto">
-							<div class="p-2 mt-1 text-sm text-gray-700 bg-gray-200 rounded-lg text-smp-2">
-								{{ message.message }}
-							</div>
-						</div>
-						<div v-else class="pl-8 ml-auto">
-							<div class="p-2 mt-1 text-sm text-white bg-blue-400 rounded-lg">
-								{{ message.message }}
-							</div>
-						</div>
-					</div>
-					<div class="p-4 ml-10 mr-auto" v-if="loading">
-						<span class="loader"></span>
-					</div>
-				</div>
-				<form @submit.prevent="sendPrompt">
-					<div class="flex items-center w-full p-4">
-						<input
-							v-model="message"
-							type="text"
-							placeholder="Type here..."
-							class="w-full p-1 text-sm text-black bg-transparent bg-gray-100 border rounded-md shadow border-white/40 grow"
-						/>
-						<button
-							:disabled="loading"
-							type="submit"
-							class="flex items-center justify-center flex-none w-10 h-10 ml-2 bg-green-500 rounded-full"
-						>
-							<svg
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<path
-									d="M22 2L11 13"
-									stroke="white"
-									stroke-width="1.5"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-								<path
-									d="M22 2L15 22L11 13L2 9L22 2Z"
-									stroke="white"
-									stroke-width="1.5"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								/>
-							</svg>
-						</button>
-					</div>
-				</form>
-			</div>
-		</div> -->
-		<div class="flex flex-col justify-center w-full my-4">
-			<div class="flex items-center justify-center my-2">
-				<span>Made with ♡ by Franklin Ramirez</span>
 
-			</div>
-		</div>
-	</div>
-</template>
 
 <style>
+
+.text-area {
+	width:100%;
+	min-height: 200px;
+	max-height: 500px;
+}
+
+.description-form {
+    display: flex;
+    align-items: center;
+	
+}
+
+.description-form label {
+    margin-right: 10px;
+}
+
+.description-container {
+    display: flex;
+    align-items: center;
+	
+}
+
+.description-container input {
+    margin-right: 10px;
+	
+}
+
+.description-form {
+    margin: 20px;
+    padding: 10px;
+	
+}
+
+.description-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.description-form label {
+    font-weight: bold;
+}
+
+
+.input-form {
+    display: flex;
+    align-items: center;
+	
+}
+
+.input-form label {
+    margin-right: 10px;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+	
+}
+
+.input-container input {
+    margin-right: 10px;
+	
+}
+
+.input-form {
+    margin: 20px;
+    padding: 10px;
+	
+}
+
+.input-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.input-form label {
+    font-weight: bold;
+}
+
+	.submit-button {
+		background-color: #4CAF50;
+		color: white;
+		padding: 12px 20px;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+	}
+
+	.submit-button:hover{
+		background-color: #45a049;
+	}
 	.loader {
 		width: 12px;
 		height: 12px;
