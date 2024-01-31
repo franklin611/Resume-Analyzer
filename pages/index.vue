@@ -15,7 +15,11 @@
 		<div class="input-form">
 			<label for="descriptionText">Job Description:</label>
 			<input type="text" id="descriptionText" v-model="description">
-			<button class="submit-button" @click="submitDescription">Submit</button>
+			<button class="submit-button" @click="findSimilarities">Submit</button>
+		</div>
+
+		<div class="input-form">
+			<textarea class="text-area" id="similarities" v-model="similaritiesText" readonly></textarea>
 		</div>
 
 		<div class="flex flex-col justify-center w-full my-4">
@@ -31,14 +35,33 @@ export default {
 	data() {
 		return {
 			inputText: '',
-			outputText: ''
+			outputText: '',
+			description: '',
+			similaritiesText: ''
 		};
 	},
 	methods: {
 		submitText() {
 			console.log("Submit button clicked. Input text:", this.inputText); // Debugging log
 			this.outputText = this.inputText;
+		},
+		findSimilarities() {
+			console.log("Job Description button clicked. Input text:", this.description); // Debugging log
+			const outputWords  = new Set(this.outputText.toLowerCase().split(/\s+/)); // Split the words into a set
+			const descriptionWords = new Set(this.description.toLowerCase().split(/\s+/));
+
+
+
+			let similarities = [] ; // create an empty array
+			for (let words of outputWords ) {
+				if (descriptionWords.has(words)) {
+					similarities.push(words);
+				}
+			}
+
+			this.similaritiesText = similarities.join(', '); 
 		}
+
 	}
 };
 </script>
