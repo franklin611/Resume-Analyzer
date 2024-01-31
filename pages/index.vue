@@ -21,7 +21,7 @@
 		<div class="input-form" style="display:block; text-align:center;">
 			<div>
 				<!-- <h2 style="display: inline; margin-bottom: 20px; margin-right: 20px;">Similarities</h2> -->
-				<h2 style="display: inline; margin-bottom: 20px; margin-right: 20px;">Similarity Score: <span id="scoreValue">{{ score }}</span></h2>
+				<h2 style="display: inline; margin-bottom: 20px; margin-right: 20px;">Similarity Score: <span id="scoreValue">{{ score }}</span>%</h2>
 			</div>
 			<textarea class="text-area" id="similarities" v-model="similaritiesText" readonly></textarea>
 		</div>
@@ -67,7 +67,7 @@ export default {
 			percentage = (similarities.length / jobWordCount) * 100;
 
 			this.similaritiesText = similarities.join(', ');
-			this.score = percentage;
+			this.score = percentage.toFixed(1);
 		}
 
 	}
