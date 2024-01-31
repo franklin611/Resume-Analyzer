@@ -9,7 +9,7 @@ const openai = new OpenAI();
 const app = express();
 app.use(bodyParser.json());
 
-const OPENAI_API_KEY = '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'; // Store this securely!
+const OPENAI_API_KEY = ''; // Store this securely!
 
 app.post('/analyze', async (req, res) => {
     const { resumeText, jobDescription } = req.body;
