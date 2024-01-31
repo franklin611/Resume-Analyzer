@@ -18,7 +18,11 @@
 			<button class="submit-button" @click="findSimilarities">Submit</button>
 		</div>
 
-		<div class="input-form">
+		<div class="input-form" style="display:block; text-align:center;">
+			<div>
+				<!-- <h2 style="display: inline; margin-bottom: 20px; margin-right: 20px;">Similarities</h2> -->
+				<h2 style="display: inline; margin-bottom: 20px; margin-right: 20px;">Similarity Score: <span id="scoreValue">{{ score }}</span></h2>
+			</div>
 			<textarea class="text-area" id="similarities" v-model="similaritiesText" readonly></textarea>
 		</div>
 
@@ -37,7 +41,8 @@ export default {
 			inputText: '',
 			outputText: '',
 			description: '',
-			similaritiesText: ''
+			similaritiesText: '',
+			score: 0,
 		};
 	},
 	methods: {
@@ -47,19 +52,22 @@ export default {
 		},
 		findSimilarities() {
 			console.log("Job Description button clicked. Input text:", this.description); // Debugging log
-			const outputWords  = new Set(this.outputText.toLowerCase().split(/\s+/)); // Split the words into a set
-			const descriptionWords = new Set(this.description.toLowerCase().split(/\s+/));
+			const outputWords = new Set(this.outputText.toLowerCase().split(/\s+/)); // Split the words into a set
+			const descriptionWords = new Set(this.description.toLowerCase().split(/\s+/)); // ignoring white space and spacing
+			const jobWordCount = descriptionWords.size;
+			let percentage = 0;
 
-
-
-			let similarities = [] ; // create an empty array
-			for (let words of outputWords ) {
+			let similarities = []; // create an empty array
+			for (let words of outputWords) {
 				if (descriptionWords.has(words)) {
 					similarities.push(words);
 				}
 			}
 
-			this.similaritiesText = similarities.join(', '); 
+			percentage = (similarities.length / jobWordCount) * 100;
+
+			this.similaritiesText = similarities.join(', ');
+			this.score = percentage;
 		}
 
 	}
@@ -67,6 +75,11 @@ export default {
 </script>
 
 <style>
+h2 {
+	font-size: 20px;
+	font-weight: bold;
+}
+
 .text-area {
 	width: 100%;
 	min-height: 200px;
@@ -76,7 +89,6 @@ export default {
 .input-form {
 	display: flex;
 	align-items: center;
-
 }
 
 .input-form label {
@@ -138,6 +150,14 @@ export default {
 	animation: animloader 2s linear infinite;
 }
 
+/* Will apply to the whole webpage */
+body {
+	background: linear-gradient(to right, rgb(182, 244, 146), rgb(51, 139, 147));
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+
 @keyframes animloader {
 	0% {
 		box-shadow: 14px 0 0 -2px, 38px 0 0 -2px, -14px 0 0 -2px, -38px 0 0 -2px;
@@ -154,4 +174,5 @@ export default {
 	75% {
 		box-shadow: 14px 0 0 2px, 38px 0 0 -2px;
 	}
-}</style>
+}
+</style>

@@ -9,7 +9,11 @@ module.exports = {
 		'./app.vue'
 	],
 	theme: {
-		extend: {}
+		extend: {
+			backgroundColor: {
+				'custom-color': 'linear-gradient(to right, rgb(182, 244, 146), rgb(51, 139, 147))' // Your custom color
+			  }
+		}
 	},
 	plugins: []
 };
